@@ -1,7 +1,6 @@
 var TurtleDancer = function(top, left, timeBetweenSteps){
   Dancer.call(this, top, left, timeBetweenSteps);
-  this._left = left;
-  this.$node = $('<span class="turtleDancer"></span>');
+  this.$node = $('<img class="turtleDancer" src="turtle.jpg" height ="100">');
   // we plan to overwrite the step function below, but we still want the superclass step behavior to work,
   // so we must keep a copy of the old version of this function
   // var oldStep = makeDancer.step;
@@ -11,6 +10,14 @@ TurtleDancer.prototype.constructor = TurtleDancer;
 TurtleDancer.prototype.step = function(){
   // call the old version of step at the beginning of any call to this new version of step
   Dancer.prototype.step.call(this);
-  this._left = this._left-3;
-  this.$node.css({left: this._left});
+  if(this.dancing){
+    var x = this.$node.css('left').slice(0, -2);
+    var y = this.$node.css('top').slice(0, -2);
+    debugger;
+    x -= 3;
+    this.setPosition(y, x);
+  }
+
 };
+
+// <span class="turtleDancer"></span>

@@ -1,9 +1,7 @@
 var CatDancer = function(top, left, timeBetweenSteps){
-  Dancer.call(this, top, left, timeBetweenSteps);
-    this._top = top;
-    this._left = left;
-    this.$node = $('<span class="catDancer"></span>');
-    this.count =0;
+  Dancer.call(this, top, left, 30);
+  this.$node = $('<img class="catDancer" src="cat.jpg" height ="100">');
+  this.count =0;
   // we plan to overwrite the step function below, but we still want the superclass step behavior to work,
   // so we must keep a copy of the old version of this function
   // var oldStep = makeDancer.step;
@@ -17,13 +15,38 @@ CatDancer.prototype.step = function(){
   // toggle() is a jQuery method to show/hide the <span> tag.
   // See http://api.jquery.com/category/effects/ for this and
   // other effects you can use on a jQuery-wrapped html tag.
-  this.count++;
-  (this.count % 4 === 1 || this.count % 4 === 2) ? this._top -= 80: this._top += 80;
-  if(this._left < 1200){
-    this._left += 20;
-  }else{
-    this._left = 0;
+
+  // when others are around...
+  var dancers = window.dancers;
+  debugger;
+  var x = Number(this.$node.css("left").slice(0, -2));
+  var y = Number(this.$node.css("top").slice(0, -2));
+
+  for(var i = 0; i < dancers.length; i++){
+    if(this.$node !== dancers[i].$node){
+      var hisX = Number(dancers[i].$node.css('left').slice(0, -2));
+      var hisY = Number(dancers[i].$node.css('top').slice(0, -2));
+      if(Math.sqrt((x-hisX) * (x-hisX) + (y-hisY) * (y-hisY) ) <= 200){
+        this.$node.attr('src', 'grampy.jpg');
+      }else{
+        this.$node.attr('src', 'cat.jpg');
+      }
+    }
   }
-  this.$node.css({top:this._top ,left:this._left});
+
+  if(this.dancing){
+    this.count++;
+    (this.count % 40 < 20) ? y -= 10: y += 10;
+    if(x < 1200){
+      x += 5;
+    }else{
+      x = 0;
+    }
+    this.setPosition(y, x);
+  }
+
 
 };
+
+
+// <span class="catDancer"></span>

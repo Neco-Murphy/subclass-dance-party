@@ -3,7 +3,8 @@ body, html{
 }
 body{
   margin: 0px;
-  background-color:#444;
+  background-image: url(background.jpg);
+  background-size: contain;
   font-size: 18px;
 }
 body, a:link, a:visited, a:active{
@@ -20,20 +21,25 @@ body, a:link, a:visited, a:active{
 .title{
   background-color: #777;
 }
-.dancer{
-  border:20px solid red;
-  border-radius:20px;
+.blinkyDancer{
+  border-radius:60px;
   position:absolute;
+  /*cursor: pointer;*/
 }
 
 .turtleDancer{
-  border:20px solid green;
-  border-radius:20px;
+  border-radius:60px;
   position:absolute;
+  content: url("turtle.jpg");
 }
 
 .catDancer{
-  border:20px solid blue;
-  border-radius:20px;
+  border-radius:60px;
   position:absolute;
+
+}
+
+.turn{
+  -webkit-transform: rotate(20deg);
+  -webkit-transiton: .3s;
 }
