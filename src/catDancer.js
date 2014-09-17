@@ -1,6 +1,9 @@
 var CatDancer = function(top, left, timeBetweenSteps){
   Dancer.call(this, top, left, 30);
+  var locT = this.$node.css("top");
+  var locL = this.$node.css("left");
   this.$node = $('<img class="catDancer" src="cat.jpg" height ="100">');
+  this.$node.css({top: locT, left: locL});
   this.count =0;
   // we plan to overwrite the step function below, but we still want the superclass step behavior to work,
   // so we must keep a copy of the old version of this function
@@ -18,7 +21,7 @@ CatDancer.prototype.step = function(){
 
   // when others are around...
   var dancers = window.dancers;
-  debugger;
+  // debugger;
   var x = Number(this.$node.css("left").slice(0, -2));
   var y = Number(this.$node.css("top").slice(0, -2));
 
